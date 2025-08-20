@@ -1,47 +1,82 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.auth')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<!-- Register & Login Start -->
+<div class="section section-padding">
+    <div class="container">
+
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <!-- Register & Login Wrapper Start -->
+        <div class="register-login-wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+
+                    <!-- Register & Login Images Start -->
+                    <div class="register-login-images">
+                        <div class="shape-1">
+                            <img src="assets/images/shape/shape-26.png" alt="Shape">
+                        </div>
+
+
+                        <div class="images">
+                            <img src="assets/images/register-login.png" alt="Register Login">
+                        </div>
+                    </div>
+                    <!-- Register & Login Images End -->
+
+                </div>
+                <div class="col-lg-6">
+
+                    <!-- Register & Login Form Start -->
+                    <div class="register-login-form">
+                        <h3 class="title">Login <span>Now</span></h3>
+
+                        <div class="form-wrapper">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+
+                                <!-- Single Form Start -->
+                                <div class="single-form">
+                                    <input type="email" placeholder="Username or Email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                                </div>
+                                <!-- Single Form End -->
+                                <!-- Single Form Start -->
+                                <div class="single-form">
+                                    <input type="password" placeholder="Password" name="password" required autocomplete="current-password">
+                                </div>
+                                <!-- Single Form End -->
+                                <div class="single-form">
+                                    <label for="remember_me" class="inline-flex items-center">
+                                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                        <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                    </label>
+                                </div>
+                                @if (Route::has('password.request'))
+                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                    {{ __('Forgot your password?') }}
+                                </a>
+                                @endif
+
+                                <p class="mt-4">Don't have an account? <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-500">{{ __('Register') }}</a></p>
+                                <!-- Single Form Start -->
+                                <div class="single-form">
+                                    <button type="submit" class="btn btn-primary btn-hover-dark w-100">Login</button>
+                                </div>
+                                <!-- Single Form End -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Register & Login Form End -->
+
+                </div>
+            </div>
         </div>
+        <!-- Register & Login Wrapper End -->
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    </div>
+</div>
+<!-- Register & Login End -->
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

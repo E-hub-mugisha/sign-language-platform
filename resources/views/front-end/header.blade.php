@@ -1,3 +1,7 @@
+@php
+$categories = App\Models\LessonCategory::all();
+@endphp
+
 <!-- Header Section Start -->
 <div class="header-section">
 
@@ -50,60 +54,30 @@
 
                 <!-- Header Logo Start -->
                 <div class="header-logo">
-                    <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo"></a>
                 </div>
                 <!-- Header Logo End -->
 
                 <!-- Header Menu Start -->
                 <div class="header-menu d-none d-lg-block">
                     <ul class="nav-menu">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li>
-                            <a href="#">All Course</a>
+                            <a href="{{ route('lessons.index') }}">Lessons</a>
+                        </li>
+                        <li>
+                            <a href="#">Category</a>
                             <ul class="sub-menu">
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="courses-details.html">Courses Details</a></li>
+                                @foreach ($categories as $category)
+                                <li><a href="{{ route('lessons.category', $category->id) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Pages </a>
-                            <ul class="sub-menu">
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="register.html">Register</a></li>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="404-error.html">404 Error</a></li>
-                                <li><a href="after-enroll.html">After Enroll</a></li>
-                                <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                                <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                                <li><a href="students.html">Students</a></li>
-                                <li><a href="reviews.html">Reviews</a></li>
-                                <li><a href="engagement.html">Course engagement</a></li>
-                                <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                                <li><a href="messages.html">Messages</a></li>
-                            </ul>
+                            <a href="{{ route('home.educationalTips') }}">Educational Tips</a>
                         </li>
-                        <li>
-                            <a href="#">Blog</a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-grid.html">Blog</a></li>
-                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Blog Details</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                        <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{ route('home.instructors') }}">Instructors</a></li>
+                        <li><a href="{{ route('home.contact') }}">Contact</a></li>
                     </ul>
 
                 </div>
@@ -112,8 +86,8 @@
                 <!-- Header Sing In & Up Start -->
                 <div class="header-sign-in-up d-none d-lg-block">
                     <ul>
-                        <li><a class="sign-in" href="login.html">Sign In</a></li>
-                        <li><a class="sign-up" href="register.html">Sign Up</a></li>
+                        <li><a class="sign-in" href="{{ route('login') }}">Sign In</a></li>
+                        <li><a class="sign-up" href="{{ route('register') }}">Sign Up</a></li>
                     </ul>
                 </div>
                 <!-- Header Sing In & Up End -->
@@ -157,8 +131,8 @@
     <!-- Mobile Sing In & Up Start -->
     <div class="mobile-sign-in-up">
         <ul>
-            <li><a class="sign-in" href="login.html">Sign In</a></li>
-            <li><a class="sign-up" href="register.html">Sign Up</a></li>
+            <li><a class="sign-in" href="{{ route('login') }}">Sign In</a></li>
+            <li><a class="sign-up" href="{{ route('register') }}">Sign Up</a></li>
         </ul>
     </div>
     <!-- Mobile Sing In & Up End -->
@@ -166,53 +140,23 @@
     <!-- Mobile Menu Start -->
     <div class="mobile-menu-items">
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
             <li>
-                <a href="#">All Course</a>
-                <ul class="sub-menu">
-                    <li><a href="courses.html">Courses</a></li>
-                    <li><a href="courses-details.html">Courses Details</a></li>
-                </ul>
+                <a href="{{ route('lessons.index') }}">Lessons</a>
             </li>
             <li>
-                <a href="#">Pages </a>
+                <a href="#">Category</a>
                 <ul class="sub-menu">
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="404-error.html">404 Error</a></li>
-                    <li><a href="after-enroll.html">After Enroll</a></li>
-                    <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                    <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                    <li><a href="students.html">Students</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="engagement.html">Course engagement</a></li>
-                    <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                    <li><a href="messages.html">Messages</a></li>
+                    @foreach ($categories as $category)
+                    <li><a href="{{ route('lessons.category', $category->id) }}">{{ $category->name }}</a></li>
+                    @endforeach
                 </ul>
             </li>
+            <li><a href="{{ route('home.instructors') }}">Instructors</a></li>
             <li>
-                <a href="#">Blog</a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-grid.html">Blog</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Blog Details</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                            <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <a href="{{ route('home.educationalTips') }}">Educational Tips</a>
             </li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="{{ route('home.contact') }}">Contact</a></li>
         </ul>
 
     </div>

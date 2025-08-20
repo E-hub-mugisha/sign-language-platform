@@ -13,4 +13,9 @@ class LessonCategory extends Model
     {
         return $this->hasMany(Lesson::class, 'category_id');
     }
+
+    public function educationTips()
+    {
+        return $this->hasMany(EducationTip::class, 'category_id');
+    }
 }

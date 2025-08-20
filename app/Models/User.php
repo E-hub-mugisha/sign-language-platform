@@ -46,4 +46,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // app/Models/User.php
+
+    public function lessonReviews()
+    {
+        return $this->hasMany(LessonReview::class);
+    }
+
+    // User.php
+    public function enrolledLessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_enrollments')->withTimestamps();
+    }
 }

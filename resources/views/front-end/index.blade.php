@@ -204,6 +204,50 @@
 </div>
 <!-- All Courses End -->
 
+<!-- Team Member's Start -->
+<div class="section section-padding mt-n1">
+    <div class="container">
+
+        <!-- Section Title Start -->
+        <div class="section-title shape-03 text-center">
+            <h5 class="sub-title">Team Member’s</h5>
+            <h2 class="main-title">Skilled <span> Instructor</span></h2>
+        </div>
+        <!-- Section Title End -->
+
+        <!-- Team Wrapper Start -->
+        <div class="team-wrapper">
+            <div class="row row-cols-lg-5 row-cols-sm-3 row-cols-2 ">
+                @foreach ($instructors as $instructor)
+                <div class="col">
+
+                    <!-- Single Team Start -->
+                    <div class="single-team">
+                        <div class="team-thumb">
+                            <img src="{{ asset('assets/images/author/author-01.jpg') }}" alt="Author">
+                        </div>
+                        <div class="team-content">
+                            <div class="rating">
+                                <span class="count">4.9</span>
+                                <i class="icofont-star"></i>
+                                <span class="text">(rating)</span>
+                            </div>
+                            <h4 class="name">{{ $instructor->name }}</h4>
+                            <span class="designation">{{ $instructor->qualification }}, Instructor</span>
+                        </div>
+                    </div>
+                    <!-- Single Team End -->
+
+                </div>
+                @endforeach
+            </div>
+        </div>
+        <!-- Team Wrapper End -->
+
+    </div>
+</div>
+<!-- Team Member's End -->
+
 <!-- Call to Action Start -->
 <div class="section section-padding-02">
     <div class="container">
@@ -228,7 +272,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="call-to-action-btn">
-                        <a class="btn btn-primary btn-hover-dark" href="contact.html">Drop Information</a>
+                        <a class="btn btn-primary btn-hover-dark" href="{{ route('home.contact') }}">Drop Information</a>
                     </div>
                 </div>
             </div>
@@ -313,8 +357,60 @@
 </div>
 <!-- How It Work End -->
 
+<!-- Testimonial End -->
+<div class="section section-padding-02 mt-n1">
+    <div class="container">
+
+        <!-- Section Title Start -->
+        <div class="section-title shape-03 text-center">
+            <h5 class="sub-title">Student Testimonial</h5>
+            <h2 class="main-title">Feedback From <span> Student</span></h2>
+        </div>
+        <!-- Section Title End -->
+
+        <!-- Testimonial Wrapper Start -->
+        <div class="testimonial-wrapper testimonial-active">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($testimonials as $testimonial)
+                    <div class="single-testimonial swiper-slide">
+                        <div class="testimonial-author">
+                            <div class="author-thumb">
+                                <img src="{{ asset('assets/images/author/author-03.jpg') }}" alt="Author">
+                                <i class="icofont-quote-left"></i>
+                            </div>
+
+                            <span class="rating-star">
+                                @php
+                                $ratingPercent = ($testimonial->rating / 5) * 100;
+                                @endphp
+                                <span class="rating-bar" style="width: {{ $ratingPercent }}%;"></span>
+                            </span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>{{ $testimonial->message }}</p>
+                            <h4 class="name">{{ $testimonial->name }}</h4>
+                            <span class="designation">
+                                {{ $testimonial->role ?? 'Student' }}
+                            </span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <!-- Testimonial Wrapper End -->
+
+
+    </div>
+</div>
+<!-- Testimonial End -->
+
 <!-- Download App Start -->
-<div class="section section-padding download-section">
+<div class="section section-padding download-section mt-4">
 
     <div class="app-shape-1"></div>
     <div class="app-shape-2"></div>
@@ -329,7 +425,7 @@
             <!-- Section Title Start -->
             <div class="section-title section-title-white">
                 <h5 class="sub-title">Ready to start?</h5>
-                <h2 class="main-title">Download our mobile app. for easy to start your course.</h2>
+                <h2 class="main-title">Here you can share your experience.</h2>
             </div>
             <!-- Section Title End -->
 
@@ -338,8 +434,62 @@
             <!-- Download App Button End -->
             <div class="download-app-btn">
                 <ul class="app-btn">
-                    <li><a href="#"><img src="assets/images/google-play.png" alt="Google Play"></a></li>
-                    <li><a href="#"><img src="assets/images/app-store.png" alt="App Store"></a></li>
+                    <li>
+                        <button type="button" class="btn btn-outline-light mb-4" data-bs-toggle="modal" data-bs-target="#testimonialModal">
+                            <i class="bi bi-chat-dots"></i> Submit Testimonial
+                        </button>
+
+                        <!-- Testimonial Modal -->
+                        <div class="modal fade" id="testimonialModal" tabindex="-1" aria-labelledby="testimonialModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content rounded-4 shadow-lg">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="testimonialModalLabel"><i class="bi bi-chat-quote"></i> Submit Your Testimonial</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('front-testimonials.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="single-form mb-3 col-md-6">
+                                                    <label for="name" class="form-label">Your Name</label>
+                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
+                                                </div>
+                                                <div class="single-form mb-3 col-md-6">
+                                                    <label for="role" class="form-label">Your Role</label>
+                                                    <input type="text" name="role" id="role" class="form-control" placeholder="Enter your role (e.g. Student, Teacher)" required>
+                                                </div>
+                                                <div class="single-form mb-3 col-md-6">
+                                                    <label for="photo" class="form-label">Your Photo (optional)</label>
+                                                    <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
+                                                </div>
+
+                                                <div class="single-form mb-3 col-md-6">
+                                                    <label class="form-label">Rating</label>
+                                                    <select name="rating" class="form-select" required>
+                                                        <option value="">-- Select Rating --</option>
+                                                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                                                        <option value="3">⭐⭐⭐ (3)</option>
+                                                        <option value="2">⭐⭐ (2)</option>
+                                                        <option value="1">⭐ (1)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="single-form mb-3 col-md-12">
+                                                    <label for="message" class="form-label">Testimonial</label>
+                                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Write your experience..." required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success"><i class="bi bi-send"></i> Submit</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <!-- Download App Button End -->
@@ -350,95 +500,6 @@
     </div>
 </div>
 <!-- Download App End -->
-
-<!-- Testimonial End -->
-<div class="section section-padding-02 mt-n1">
-    <div class="container">
-
-        <!-- Section Title Start -->
-        <div class="section-title shape-03 text-center">
-            <h5 class="sub-title">Student Testimonial</h5>
-            <h2 class="main-title">Feedback From <span> Student</span></h2>
-        </div>
-        <!-- Section Title End -->
-
-        <!-- Testimonial Wrapper End -->
-        <div class="testimonial-wrapper testimonial-active">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Single Testimonial Start -->
-                    <div class="single-testimonial swiper-slide">
-                        <div class="testimonial-author">
-                            <div class="author-thumb">
-                                <img src="assets/images/author/author-06.jpg" alt="Author">
-
-                                <i class="icofont-quote-left"></i>
-                            </div>
-
-                            <span class="rating-star">
-                                <span class="rating-bar" style="width: 80%;"></span>
-                            </span>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>
-                            <h4 class="name">Sara Alexander</h4>
-                            <span class="designation">Product Designer, USA</span>
-                        </div>
-                    </div>
-                    <!-- Single Testimonial End -->
-
-                    <!-- Single Testimonial Start -->
-                    <div class="single-testimonial swiper-slide">
-                        <div class="testimonial-author">
-                            <div class="author-thumb">
-                                <img src="assets/images/author/author-07.jpg" alt="Author">
-
-                                <i class="icofont-quote-left"></i>
-                            </div>
-
-                            <span class="rating-star">
-                                <span class="rating-bar" style="width: 80%;"></span>
-                            </span>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>
-                            <h4 class="name">Melissa Roberts</h4>
-                            <span class="designation">Product Designer, USA</span>
-                        </div>
-                    </div>
-                    <!-- Single Testimonial End -->
-
-                    <!-- Single Testimonial Start -->
-                    <div class="single-testimonial swiper-slide">
-                        <div class="testimonial-author">
-                            <div class="author-thumb">
-                                <img src="assets/images/author/author-03.jpg" alt="Author">
-
-                                <i class="icofont-quote-left"></i>
-                            </div>
-
-                            <span class="rating-star">
-                                <span class="rating-bar" style="width: 80%;"></span>
-                            </span>
-                        </div>
-                        <div class="testimonial-content">
-                            <p>Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>
-                            <h4 class="name">Sara Alexander</h4>
-                            <span class="designation">Product Designer, USA</span>
-                        </div>
-                    </div>
-                    <!-- Single Testimonial End -->
-                </div>
-
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-        <!-- Testimonial Wrapper End -->
-
-    </div>
-</div>
-<!-- Testimonial End -->
 
 <!-- Brand Logo Start -->
 <div class="section section-padding-02">
@@ -524,12 +585,13 @@
         <!-- Blog Wrapper Start -->
         <div class="blog-wrapper">
             <div class="row">
+                @foreach ($educationalTips as $tip)
                 <div class="col-lg-4 col-md-6">
 
                     <!-- Single Blog Start -->
                     <div class="single-blog">
                         <div class="blog-image">
-                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-01.jpg" alt="Blog"></a>
+                            <a href="{{ route('home.educationalTips.show', $tip->slug) }}"><img src="assets/images/blog/blog-01.jpg" alt="Blog"></a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-author">
@@ -538,97 +600,28 @@
                                         <a href="#"><img src="assets/images/author/author-01.jpg" alt="Author"></a>
                                     </div>
                                     <div class="author-name">
-                                        <a class="name" href="#">Jason Williams</a>
+                                        <a class="name" href="#">{{ $tip->user->name }}</a>
                                     </div>
                                 </div>
                                 <div class="tag">
-                                    <a href="#">Science</a>
+                                    <a href="#">{{ $tip->category->name }}</a>
                                 </div>
                             </div>
 
-                            <h4 class="title"><a href="blog-details-left-sidebar.html">Data Science and Machine Learning with Python - Hands On!</a></h4>
+                            <h4 class="title"><a href="{{ route('home.educationalTips.show', $tip->slug) }}">{{ $tip->title }}</a></h4>
 
                             <div class="blog-meta">
-                                <span> <i class="icofont-calendar"></i> 21 March, 2021</span>
-                                <span> <i class="icofont-heart"></i> 2,568+ </span>
+                                <span> <i class="icofont-calendar"></i> {{ $tip->created_at->format('d F, Y') }}</span>
+                                <span> <i class="icofont-heart"></i> {{ $tip->views }}+ </span>
                             </div>
 
-                            <a href="blog-details-left-sidebar.html" class="btn btn-secondary btn-hover-primary">Read More</a>
+                            <a href="{{ route('home.educationalTips.show', $tip->slug) }}" class="btn btn-secondary btn-hover-primary">Read More</a>
                         </div>
                     </div>
                     <!-- Single Blog End -->
 
                 </div>
-                <div class="col-lg-4 col-md-6">
-
-                    <!-- Single Blog Start -->
-                    <div class="single-blog">
-                        <div class="blog-image">
-                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-02.jpg" alt="Blog"></a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-author">
-                                <div class="author">
-                                    <div class="author-thumb">
-                                        <a href="#"><img src="assets/images/author/author-02.jpg" alt="Author"></a>
-                                    </div>
-                                    <div class="author-name">
-                                        <a class="name" href="#">Pamela Foster</a>
-                                    </div>
-                                </div>
-                                <div class="tag">
-                                    <a href="#">UX Design</a>
-                                </div>
-                            </div>
-
-                            <h4 class="title"><a href="blog-details-left-sidebar.html">Create Amazing Color Schemes for Your UX Design Projects</a></h4>
-
-                            <div class="blog-meta">
-                                <span> <i class="icofont-calendar"></i> 21 March, 2021</span>
-                                <span> <i class="icofont-heart"></i> 2,568+ </span>
-                            </div>
-
-                            <a href="blog-details-left-sidebar.html" class="btn btn-secondary btn-hover-primary">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Single Blog End -->
-
-                </div>
-                <div class="col-lg-4 col-md-6">
-
-                    <!-- Single Blog Start -->
-                    <div class="single-blog">
-                        <div class="blog-image">
-                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-03.jpg" alt="Blog"></a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-author">
-                                <div class="author">
-                                    <div class="author-thumb">
-                                        <a href="#"><img src="assets/images/author/author-03.jpg" alt="Author"></a>
-                                    </div>
-                                    <div class="author-name">
-                                        <a class="name" href="#">Patricia Collins</a>
-                                    </div>
-                                </div>
-                                <div class="tag">
-                                    <a href="#">Business</a>
-                                </div>
-                            </div>
-
-                            <h4 class="title"><a href="blog-details-left-sidebar.html">Culture & Leadership: Strategies for a Successful Business</a></h4>
-
-                            <div class="blog-meta">
-                                <span> <i class="icofont-calendar"></i> 21 March, 2021</span>
-                                <span> <i class="icofont-heart"></i> 2,568+ </span>
-                            </div>
-
-                            <a href="blog-details-left-sidebar.html" class="btn btn-secondary btn-hover-primary">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Single Blog End -->
-
-                </div>
+                @endforeach
             </div>
         </div>
         <!-- Blog Wrapper End -->

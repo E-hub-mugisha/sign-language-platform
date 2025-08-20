@@ -34,4 +34,25 @@ class Lesson extends Model
     {
         return $this->belongsTo(User::class, 'tutor_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(LessonReview::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
+
+    // Lesson.php
+    public function enrolledUsers()
+    {
+        return $this->belongsToMany(User::class, 'lesson_enrollments')->withTimestamps();
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(LessonEnrollment::class);
+    }
 }
