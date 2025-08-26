@@ -40,6 +40,12 @@ class LessonController extends Controller
         return redirect()->route('admin.lessons.index')->with('success', 'Lesson created successfully.');
     }
 
+    public function show($id)
+    {
+        $lesson = Lesson::with(['category', 'tutor'])->findOrFail($id);
+        return view('admin.lessons.show', compact('lesson'));
+    }
+
     public function edit($id)
     {
         $lesson = Lesson::findOrFail($id);

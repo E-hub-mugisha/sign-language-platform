@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EducationTip;
+use App\Models\Lesson;
+use App\Models\LessonCategory;
 use App\Models\Partner;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,8 +15,25 @@ class AdminController extends Controller
     //
     public function index()
     {
-        // This method can be used to show the admin dashboard or any other admin-related view
-        return view('admin.dashboard');
+        $totalLessons = Lesson::count();
+        $activeTips = EducationTip::where('is_active', true)->count();
+        $inactiveTips = EducationTip::where('is_active', false)->count();
+        $totalViews = EducationTip::sum('views');
+
+        $categoriesCount = LessonCategory::count();
+        $usersCount = User::count();
+
+        $topTips = EducationTip::orderBy('views', 'desc')->take(5)->get();
+
+        return view('admin.dashboard', compact(
+            'totalLessons',
+            'activeTips',
+            'inactiveTips',
+            'totalViews',
+            'categoriesCount',
+            'usersCount',
+            'topTips'
+        ));
     }
 
     public function partners()

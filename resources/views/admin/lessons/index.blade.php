@@ -25,7 +25,7 @@
         <tbody>
             @foreach($lessons as $lesson)
                 <tr>
-                    <td>{{ $lesson->title }}</td>
+                    <td><a href="{{ route('admin.lessons.show', $lesson->id) }}">{{ $lesson->title }}</a></td>
                     <td>{{ $lesson->category?->name }}</td>
                     <td>{{ $lesson->language }}</td>
                     <td>{{ $lesson->tutor?->name ?? 'N/A' }}</td>

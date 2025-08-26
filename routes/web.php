@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     // admin lessons
     Route::get('/admin/lessons', [LessonController::class, 'index'])->name('admin.lessons.index');
     Route::get('/admin/lessons/create', [LessonController::class, 'create'])->name('admin.lessons.create');
+    Route::get('/admin/lessons/show/{id}', [LessonController::class, 'show'])->name('admin.lessons.show');
     Route::post('/admin/lessons', [LessonController::class, 'store'])->name('admin.lessons.store');
     Route::get('/admin/lessons/{id}/edit', [LessonController::class, 'edit'])->name('admin.lessons.edit');
     Route::put('/admin/lessons/{id}', [LessonController::class, 'update'])->name('admin.lessons.update');

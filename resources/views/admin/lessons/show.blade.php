@@ -33,43 +33,73 @@
             <div class="mb-3">
                 <strong>Status:</strong>
                 @if($lesson->is_active)
-                    <span class="badge bg-success">Active</span>
+                <span class="badge bg-success">Active</span>
                 @else
-                    <span class="badge bg-secondary">Inactive</span>
+                <span class="badge bg-secondary">Inactive</span>
                 @endif
             </div>
 
             <div class="mb-3">
                 <strong>Video:</strong>
                 @if($lesson->video_url)
-                    <div class="ratio ratio-16x9">
-                        <iframe src="{{ $lesson->video_url }}" title="Video" allowfullscreen></iframe>
-                    </div>
+                <div class="ratio ratio-16x9">
+                    <iframe src="{{ $lesson->video_url }}" title="Video" allowfullscreen></iframe>
+                </div>
                 @else
-                    <p>No video uploaded.</p>
+                <p>No video uploaded.</p>
                 @endif
             </div>
 
             <div class="mb-3">
                 <strong>Thumbnail:</strong>
                 @if($lesson->thumbnail_url)
-                    <img src="{{ $lesson->thumbnail_url }}" alt="Thumbnail" class="img-fluid img-thumbnail" style="max-width: 300px;">
+                <img src="{{ $lesson->thumbnail_url }}" alt="Thumbnail" class="img-fluid img-thumbnail" style="max-width: 300px;">
                 @else
-                    <p>No thumbnail uploaded.</p>
+                <p>No thumbnail uploaded.</p>
                 @endif
             </div>
 
             <div class="mb-3">
                 <strong>PDF Resource:</strong>
                 @if($lesson->pdf_url)
-                    <a href="{{ $lesson->pdf_url }}" class="btn btn-outline-primary" target="_blank">Download PDF</a>
+                <a href="{{ $lesson->pdf_url }}" class="btn btn-outline-primary" target="_blank">Download PDF</a>
                 @else
-                    <p>No PDF uploaded.</p>
+                <p>No PDF uploaded.</p>
                 @endif
             </div>
         </div>
     </div>
 
+    <div class="nk-block-body">
+        <table class="table table-striped align-middle table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($lesson->reviews as $review)
+                <tr>
+                    <td>{{ $review->id }}</td>
+                    <td>{{ $review->user->name }}</td>
+                    <td>{{ $review->rating }}</td>
+                    <td>{{ $review->comment }}</td>
+                    <td>
+                        <form action="{{ route('admin.lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     <div class="d-flex gap-2">
         <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-warning">Edit Lesson</a>
         <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this lesson?');">
