@@ -162,7 +162,7 @@ class HomeController extends Controller
     {
         $category_id = $request->query('category');
 
-        $tips = EducationTip::with(['user', 'category'])
+        $educationTips = EducationTip::with(['user', 'category'])
             ->where('is_active', 1)
             ->when($category_id, function ($query, $category_id) {
                 $query->where('category_id', $category_id);
@@ -172,7 +172,7 @@ class HomeController extends Controller
 
         $categories = LessonCategory::all();
 
-        return view('front-end.education-tips', compact('tips', 'categories', 'category_id'));
+        return view('front-end.educational-tips', compact('educationTips', 'categories', 'category_id'));
     }
 
     // Show single tip by slug

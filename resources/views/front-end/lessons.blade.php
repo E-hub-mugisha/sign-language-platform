@@ -57,7 +57,7 @@
                     <div class="single-courses">
                         <div class="courses-images">
                             <a href="{{ route('lessons.show', $lesson->id) }}">
-                                <img src="{{ $lesson->thumbnail_url ?? asset('assets/images/default-lesson.jpg') }}" alt="Lesson Thumbnail">
+                                <img src="{{ asset('assets/images/default-lesson.jpg') }}" alt="Lesson Thumbnail">
                             </a>
                         </div>
                         <div class="courses-content">
@@ -65,7 +65,7 @@
                                 <div class="author">
                                     <div class="author-thumb">
                                         <a href="#">
-                                            <img src="{{ $lesson->tutor->profile_photo_url ?? asset('assets/images/author/default.jpg') }}" alt="Tutor">
+                                            <img src="{{ asset('assets/images/author/default.jpg') }}" alt="Tutor">
                                         </a>
                                     </div>
                                     <div class="author-name">

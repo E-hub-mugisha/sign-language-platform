@@ -14,15 +14,15 @@ $categories = App\Models\LessonCategory::all();
 
                 <!-- Header Top Left Start -->
                 <div class="header-top-left">
-                    <p>All course 28% off for <a href="#">Liberian people’s.</a></p>
+                    <p>All course 28% off for <a href="#">Rwandan people’s.</a></p>
                 </div>
                 <!-- Header Top Left End -->
 
                 <!-- Header Top Medal Start -->
                 <div class="header-top-medal">
                     <div class="top-info">
-                        <p><i class="flaticon-phone-call"></i> <a href="tel:9702621413">(970) 262-1413</a></p>
-                        <p><i class="flaticon-email"></i> <a href="mailto:address@gmail.com">address@gmail.com</a></p>
+                        <p><i class="flaticon-phone-call"></i> <a href="tel:+250782390919">+250 782 390-919</a></p>
+                        <p><i class="flaticon-email"></i> <a href="mailto:support@eduplatform.com">support@eduplatform.com</a></p>
                     </div>
                 </div>
                 <!-- Header Top Medal End -->
