@@ -8,6 +8,7 @@ use App\Models\LessonCategory;
 use App\Models\LessonReview;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
@@ -27,16 +28,32 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'language' => 'required',
-            'category_id' => 'nullable|exists:lesson_categories,id',
-            'video_url' => 'required|url',
-            'thumbnail_url' => 'nullable|url',
-            'pdf_url' => 'nullable|url',
-            'tutor_id' => 'nullable|exists:users,id',
+            'title'         => 'required|string|max:255',
+            'language'      => 'required',
+            'category_id'   => 'nullable|exists:lesson_categories,id',
+            'video_url'     => 'required|file|mimes:mp4,mov,avi,wmv|max:51200', // 50MB
+            'thumbnail_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pdf_url'       => 'nullable|file|mimes:pdf|max:10240',
+            'tutor_id'      => 'nullable|exists:users,id',
         ]);
 
-        Lesson::create($request->all());
+        $data = $request->only(['title', 'description', 'language', 'category_id', 'tutor_id', 'is_active']);
+
+        // Upload files
+        if ($request->hasFile('video_url')) {
+            $data['video_url'] = $request->file('video_url')->store('lessons/videos', 'public');
+        }
+
+        if ($request->hasFile('thumbnail_url')) {
+            $data['thumbnail_url'] = $request->file('thumbnail_url')->store('lessons/thumbnails', 'public');
+        }
+
+        if ($request->hasFile('pdf_url')) {
+            $data['pdf_url'] = $request->file('pdf_url')->store('lessons/pdfs', 'public');
+        }
+
+        Lesson::create($data);
+
         return redirect()->route('admin.lessons.index')->with('success', 'Lesson created successfully.');
     }
 
@@ -57,16 +74,41 @@ class LessonController extends Controller
     public function update(Request $request, Lesson $lesson)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'language' => 'required',
-            'category_id' => 'nullable|exists:lesson_categories,id',
-            'video_url' => 'required|url',
-            'thumbnail_url' => 'nullable|url',
-            'pdf_url' => 'nullable|url',
-            'tutor_id' => 'nullable|exists:users,id',
+            'title'         => 'required|string|max:255',
+            'language'      => 'required',
+            'category_id'   => 'nullable|exists:lesson_categories,id',
+            'video_url'     => 'nullable|file|mimes:mp4,mov,avi,wmv|max:51200',
+            'thumbnail_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pdf_url'       => 'nullable|file|mimes:pdf|max:10240',
+            'tutor_id'      => 'nullable|exists:users,id',
         ]);
 
-        $lesson->update($request->all());
+        $data = $request->only(['title', 'description', 'language', 'category_id', 'tutor_id', 'is_active']);
+
+        // Upload new files if provided, keep old otherwise
+        if ($request->hasFile('video_url')) {
+            if ($lesson->video_url && Storage::disk('public')->exists($lesson->video_url)) {
+                Storage::disk('public')->delete($lesson->video_url);
+            }
+            $data['video_url'] = $request->file('video_url')->store('lessons/videos', 'public');
+        }
+
+        if ($request->hasFile('thumbnail_url')) {
+            if ($lesson->thumbnail_url && Storage::disk('public')->exists($lesson->thumbnail_url)) {
+                Storage::disk('public')->delete($lesson->thumbnail_url);
+            }
+            $data['thumbnail_url'] = $request->file('thumbnail_url')->store('lessons/thumbnails', 'public');
+        }
+
+        if ($request->hasFile('pdf_url')) {
+            if ($lesson->pdf_url && Storage::disk('public')->exists($lesson->pdf_url)) {
+                Storage::disk('public')->delete($lesson->pdf_url);
+            }
+            $data['pdf_url'] = $request->file('pdf_url')->store('lessons/pdfs', 'public');
+        }
+
+        $lesson->update($data);
+
         return redirect()->route('admin.lessons.index')->with('success', 'Lesson updated successfully.');
     }
 
