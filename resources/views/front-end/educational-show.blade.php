@@ -203,16 +203,13 @@
 
                     <!-- Sidebar Widget Category Start -->
                     <div class="sidebar-widget">
-                        <h4 class="widget-title">Post Category</h4>
+                        <h4 class="widget-title">Tips Category</h4>
 
                         <div class="widget-category">
                             <ul class="category-list">
-                                <li><a href="#">UI/UX Design <span>(16)</span></a></li>
-                                <li><a href="#">Creative Writing <span>(03)</span></a></li>
-                                <li><a href="#">Graphic Design <span>(08)</span></a></li>
-                                <li><a href="#">Fine Arts <span>(18)</span></a></li>
-                                <li><a href="#">Business Analytics <span>(02)</span></a></li>
-                                <li><a href="#">Marketing <span>(14)</span></a></li>
+                                @foreach ($categories as $category)
+                                <li><a href="#">{{ $category->name }} <span>({{ $category->tips_count }})</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -220,107 +217,72 @@
 
                     <!-- Sidebar Widget Post Start -->
                     <div class="sidebar-widget">
-                        <h4 class="widget-title">Recent Post</h4>
+                        <h4 class="widget-title">Recent Tips</h4>
 
                         <div class="widget-post">
                             <ul class="post-items">
+                                @foreach ($relatedTips as $relatedTip)
                                 <li>
                                     <!-- Sidebar Widget Post Start -->
                                     <div class="single-post">
                                         <div class="post-thumb">
-                                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-01.jpg" alt="Post"></a>
+                                            <a href="{{ route('home.educationalTips.show', $relatedTip->slug) }}"><img src="{{ asset($relatedTip->image) }}" alt="Post"></a>
                                         </div>
                                         <div class="post-content">
-                                            <h5 class="title"><a href="blog-details-left-sidebar.html">Create Amazing Color Schemes Design</a></h5>
-                                            <span class="date"><i class="icofont-calendar"></i> 21 March, 2021</span>
+                                            <h5 class="title"><a href="{{ route('home.educationalTips.show', $relatedTip->slug) }}">{{ $relatedTip->title }}</a></h5>
+                                            <span class="date"><i class="icofont-calendar"></i> {{ $relatedTip->created_at->format('d M, Y') }}</span>
                                         </div>
                                     </div>
                                     <!-- Sidebar Widget Post End -->
                                 </li>
-                                <li>
-                                    <!-- Sidebar Widget Post Start -->
-                                    <div class="single-post">
-                                        <div class="post-thumb">
-                                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-02.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <h5 class="title"><a href="blog-details-left-sidebar.html">Data Science Machine Learning with Python</a></h5>
-                                            <span class="date"><i class="icofont-calendar"></i> 21 March, 2021</span>
-                                        </div>
-                                    </div>
-                                    <!-- Sidebar Widget Post End -->
-                                </li>
-                                <li>
-                                    <!-- Sidebar Widget Post Start -->
-                                    <div class="single-post">
-                                        <div class="post-thumb">
-                                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-03.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <h5 class="title"><a href="blog-details-left-sidebar.html">Leadership: Strategies for Business</a></h5>
-                                            <span class="date"><i class="icofont-calendar"></i> 21 March, 2021</span>
-                                        </div>
-                                    </div>
-                                    <!-- Sidebar Widget Post End -->
-                                </li>
-                                <li>
-                                    <!-- Sidebar Widget Post Start -->
-                                    <div class="single-post">
-                                        <div class="post-thumb">
-                                            <a href="blog-details-left-sidebar.html"><img src="assets/images/blog/blog-04.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <h5 class="title"><a href="blog-details-left-sidebar.html">Illustrating Badges & Geometric Shapes</a></h5>
-                                            <span class="date"><i class="icofont-calendar"></i> 21 March, 2021</span>
-                                        </div>
-                                    </div>
-                                    <!-- Sidebar Widget Post End -->
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-                    <!-- Sidebar Widget Post End -->
-
-                    <!-- Sidebar Widget Tags Start -->
-                    <div class="sidebar-widget">
-                        <h4 class="widget-title">Popular Tags</h4>
-
-                        <div class="widget-tags">
-                            <ul class="tags-list">
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Education</a></li>
-                                <li><a href="#">Design</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Sidebar Widget Tags End -->
-
-                    <!-- Sidebar Widget Share Start -->
-                    <div class="sidebar-widget">
-                        <h4 class="widget-title">Share Course:</h4>
-
-                        <ul class="social">
-                            <li><a href="#"><i class="flaticon-facebook"></i></a></li>
-                            <li><a href="#"><i class="flaticon-linkedin"></i></a></li>
-                            <li><a href="#"><i class="flaticon-twitter"></i></a></li>
-                            <li><a href="#"><i class="flaticon-skype"></i></a></li>
-                            <li><a href="#"><i class="flaticon-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- Sidebar Widget Share End -->
-
                 </div>
-                <!-- Blog Sidebar End -->
-
             </div>
+            <!-- Sidebar Widget Post End -->
+
+            <!-- Sidebar Widget Tags Start -->
+            <div class="sidebar-widget">
+                <h4 class="widget-title">Popular Tags</h4>
+
+                <div class="widget-tags">
+                    <ul class="tags-list">
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Design</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar Widget Tags End -->
+
+            <!-- Sidebar Widget Share Start -->
+            <div class="sidebar-widget">
+                <h4 class="widget-title">Share Course:</h4>
+
+                <ul class="social">
+                    <li><a href="#"><i class="flaticon-facebook"></i></a></li>
+                    <li><a href="#"><i class="flaticon-linkedin"></i></a></li>
+                    <li><a href="#"><i class="flaticon-twitter"></i></a></li>
+                    <li><a href="#"><i class="flaticon-skype"></i></a></li>
+                    <li><a href="#"><i class="flaticon-instagram"></i></a></li>
+                </ul>
+            </div>
+            <!-- Sidebar Widget Share End -->
+
         </div>
+        <!-- Blog Sidebar End -->
 
     </div>
+</div>
+
+</div>
 </div>
 <!-- Blog Details End -->
 

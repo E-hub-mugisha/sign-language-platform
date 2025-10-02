@@ -183,6 +183,14 @@ class HomeController extends Controller
         // increment views
         $tip->increment('views');
 
-        return view('front-end.educational-show', compact('tip'));
+        $relatedTips = EducationTip::where('is_active', 1)
+            ->where('id', '!=', $tip->id)
+            ->where('category_id', $tip->category_id)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $categories = LessonCategory::all();
+        return view('front-end.educational-show', compact('tip', 'relatedTips', 'categories'));
     }
 }

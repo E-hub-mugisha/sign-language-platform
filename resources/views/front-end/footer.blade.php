@@ -4,15 +4,13 @@
     <!-- Footer Widget Section Start -->
     <div class="footer-widget-section">
 
-        <img class="shape-1 animation-down" src="{{ asset('assets/images/shape/shape-21.png') }}" alt="Shape">
-
         <div class="container">
             <div class="row">
                 <!-- About / Logo Section -->
                 <div class="col-lg-3 col-md-6 order-md-1 order-lg-1">
                     <div class="footer-widget">
                         <div class="widget-logo">
-                            <a href="{{ url('/') }}"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo"></a>
+                            <a href="{{ url('/') }}">{{ config('app.name')}}</a>
                         </div>
 
                         <div class="widget-address">
@@ -89,8 +87,6 @@
             </div>
         </div>
 
-        <img class="shape-2 animation-left" src="{{ asset('assets/images/shape/shape-22.png') }}" alt="Shape">
-
     </div>
     <!-- Footer Widget Section End -->
 
@@ -105,7 +101,7 @@
                     <a href="#">Contact Us</a>
                 </div>
                 <div class="copyright-text">
-                    <p>&copy; {{ date('Y') }} <span>EduPlatform</span>. Made with <i class="icofont-heart-alt"></i> to empower learners worldwide.</p>
+                    <p>&copy; {{ date('Y') }} <span>{{ config('app.name')}}</span>. Made with <i class="icofont-heart-alt"></i> to empower learners worldwide.</p>
                 </div>
             </div>
         </div>

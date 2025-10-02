@@ -27,13 +27,14 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact')
 Route::get('/educational/tips', [HomeController::class, 'indexEducationTip'])->name('home.educationalTips');
 Route::get('/educational/tips/{slug}', [HomeController::class, 'showEducationTip'])->name('home.educationalTips.show');
 
-// Dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
+
+    // dashboard
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -95,6 +96,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/education-tips/{educationTip}/edit', [EducationalTipController::class, 'edit'])->name('admin.education-tips.edit');
     Route::put('/admin/education-tips/{educationTip}', [EducationalTipController::class, 'update'])->name('admin.education-tips.update');
     Route::delete('/admin/education-tips/{educationTip}', [EducationalTipController::class, 'destroy'])->name('admin.education-tips.destroy');
+
+    Route::get('/student/lessons', [LessonController::class, 'index'])->name('student.lessons.index');
+    Route::get('/student/lessons/show/{id}', [LessonController::class, 'show'])->name('student.lessons.show');
+    Route::get('/student/education-tips', [EducationalTipController::class, 'index'])->name('student.education-tips.index');
 });
 
 require __DIR__ . '/auth.php';

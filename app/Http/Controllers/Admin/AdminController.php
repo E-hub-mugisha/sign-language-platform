@@ -25,7 +25,7 @@ class AdminController extends Controller
 
         $topTips = EducationTip::orderBy('views', 'desc')->take(5)->get();
 
-        return view('admin.dashboard', compact(
+        return view('dashboard', compact(
             'totalLessons',
             'activeTips',
             'inactiveTips',

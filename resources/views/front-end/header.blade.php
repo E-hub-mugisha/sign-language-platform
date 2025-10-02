@@ -54,7 +54,7 @@ $categories = App\Models\LessonCategory::all();
 
                 <!-- Header Logo Start -->
                 <div class="header-logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo"></a>
+                    <a href="{{ route('home') }}">{{ config('app.name')}}</a>
                 </div>
                 <!-- Header Logo End -->
 
