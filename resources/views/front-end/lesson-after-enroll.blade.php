@@ -4,19 +4,15 @@
 
 <!-- Page Banner Start -->
 <div class="section page-banner">
-
     <div class="container">
-        <!-- Page Banner Start -->
         <div class="page-banner-content">
             <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ route('home') }}">Home</a></li>
                 <li class="active">Courses</li>
             </ul>
             <h2 class="title">My <span>Courses</span></h2>
         </div>
-        <!-- Page Banner End -->
     </div>
-
 </div>
 <!-- Page Banner End -->
 
@@ -24,24 +20,26 @@
 <div class="section section-padding">
     <div class="container">
 
-        <!-- Courses Wrapper Start  -->
+        <!-- Courses Wrapper Start -->
         <div class="courses-wrapper-02">
             <div class="row">
                 @forelse ($lessons as $lesson)
-                <div class="col-lg-4 col-md-6">
-                    <!-- Single Courses Start -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <!-- Single Course Start -->
                     <div class="single-courses">
                         <div class="courses-images">
                             <a href="{{ route('lessons.show', $lesson->id) }}">
-                                <img src="{{ $lesson->thumbnail_url ?? asset('assets/images/default-lesson.jpg') }}" alt="Lesson Thumbnail">
+                                <img src="{{ $lesson->thumbnail_url ? asset('storage/'.$lesson->thumbnail_url) : asset('assets/images/default-lesson.jpg') }}" 
+                                     alt="{{ $lesson->title }}" class="img-fluid">
                             </a>
                         </div>
                         <div class="courses-content">
-                            <div class="courses-author">
-                                <div class="author">
-                                    <div class="author-thumb">
+                            <div class="courses-author d-flex justify-content-between align-items-center mb-2">
+                                <div class="author d-flex align-items-center">
+                                    <div class="author-thumb me-2">
                                         <a href="#">
-                                            <img src="{{ $lesson->tutor->profile_photo_url ?? asset('assets/images/author/default.jpg') }}" alt="Tutor">
+                                            <img src="{{ $lesson->tutor->profile_photo_url ?? asset('assets/images/author/default.jpg') }}" 
+                                                 alt="{{ $lesson->tutor->name ?? 'Tutor' }}" class="rounded-circle">
                                         </a>
                                     </div>
                                     <div class="author-name">
@@ -49,38 +47,42 @@
                                     </div>
                                 </div>
                                 <div class="tag">
-                                    <a href="#">{{ $lesson->category->name }}</a>
+                                    <a href="#">{{ $lesson->category->name ?? 'Uncategorized' }}</a>
                                 </div>
                             </div>
 
                             <h4 class="title">
                                 <a href="{{ route('lessons.show', $lesson->id) }}">{{ $lesson->title }}</a>
                             </h4>
-                            <div class="courses-meta">
-                                <span><i class="icofont-clock-time"></i> ~15 mins</span>
-                                <span><i class="icofont-read-book"></i> Resource</span>
+
+                            <div class="courses-meta d-flex justify-content-between mt-2">
+                                <span><i class="icofont-clock-time"></i> {{ $lesson->duration ?? '~15 mins' }}</span>
+                                <span><i class="icofont-read-book"></i> {{ $lesson->resource_type ?? 'Resource' }}</span>
                             </div>
-                            <div class="courses-price-review">
+
+                            <div class="courses-price-review d-flex justify-content-between align-items-center mt-3">
                                 <div class="courses-price">
-                                    <span class="sale-parice">Free</span>
+                                    <span class="sale-price">{{ $lesson->price ? '$'.$lesson->price : 'Free' }}</span>
                                 </div>
                                 <div class="courses-review">
-                                    <span class="rating-count">4.8</span>
+                                    <span class="rating-count">{{ $lesson->average_rating ?? '4.8' }}</span>
                                     <span class="rating-star">
-                                        <span class="rating-bar" style="width: 85%;"></span>
+                                        <span class="rating-bar" style="width: {{ ($lesson->average_rating ?? 4.8) * 20 }}%;"></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Single Courses End -->
+                    <!-- Single Course End -->
                 </div>
                 @empty
-                <p class="text-center">No lessons available in this category yet.</p>
+                <div class="col-12">
+                    <p class="text-center">You haven’t enrolled in any courses yet.</p>
+                </div>
                 @endforelse
             </div>
         </div>
-        <!-- Courses Wrapper End  -->
+        <!-- Courses Wrapper End -->
 
     </div>
 </div>

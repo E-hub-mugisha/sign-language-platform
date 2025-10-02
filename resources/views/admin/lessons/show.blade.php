@@ -39,30 +39,34 @@
                 @endif
             </div>
 
+            <!-- Video -->
             <div class="mb-3">
                 <strong>Video:</strong>
                 @if($lesson->video_url)
-                    <div class="ratio ratio-16x9">
-                        <iframe src="{{ $lesson->video_url }}" title="Video" allowfullscreen></iframe>
-                    </div>
+                    <video class="w-100" controls>
+                        <source src="{{ asset('storage/' . $lesson->video_url) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 @else
                     <p>No video uploaded.</p>
                 @endif
             </div>
 
+            <!-- Thumbnail -->
             <div class="mb-3">
                 <strong>Thumbnail:</strong>
                 @if($lesson->thumbnail_url)
-                    <img src="{{ $lesson->thumbnail_url }}" alt="Thumbnail" class="img-fluid img-thumbnail" style="max-width: 300px;">
+                    <img src="{{ asset('storage/' . $lesson->thumbnail_url) }}" alt="Thumbnail" class="img-fluid img-thumbnail" style="max-width: 300px;">
                 @else
                     <p>No thumbnail uploaded.</p>
                 @endif
             </div>
 
+            <!-- PDF -->
             <div class="mb-3">
                 <strong>PDF Resource:</strong>
                 @if($lesson->pdf_url)
-                    <a href="{{ $lesson->pdf_url }}" class="btn btn-outline-primary" target="_blank">Download PDF</a>
+                    <a href="{{ asset('storage/' . $lesson->pdf_url) }}" class="btn btn-outline-primary" target="_blank">Download PDF</a>
                 @else
                     <p>No PDF uploaded.</p>
                 @endif
@@ -70,6 +74,7 @@
         </div>
     </div>
 
+    <!-- Reviews Table -->
     <div class="nk-block-body">
         <table class="table table-striped align-middle table-responsive">
             <thead>
@@ -79,7 +84,6 @@
                     <th>Rating</th>
                     <th>Comment</th>
                     
-                    {{-- Show actions only if admin or teacher --}}
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
                         <th>Actions</th>
                     @endif
@@ -93,7 +97,6 @@
                     <td>{{ $review->rating }}</td>
                     <td>{{ $review->comment }}</td>
 
-                    {{-- Only allow delete review for admin or teacher --}}
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
                         <td>
                             <form action="{{ route('admin.lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
@@ -109,7 +112,6 @@
         </table>
     </div>
 
-    {{-- Only allow editing and deleting lesson for admin or teacher --}}
     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
         <div class="d-flex gap-2">
             <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-warning">Edit Lesson</a>

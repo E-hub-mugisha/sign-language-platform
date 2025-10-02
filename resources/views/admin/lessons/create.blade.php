@@ -47,18 +47,18 @@
         </div>
 
         <div class="mb-3">
-            <label for="video_url" class="form-label">Video File</label>
-            <input type="file" class="form-control" id="video_url" name="video_url" required>
+            <label for="video_url" class="form-label">Video URL</label>
+            <input type="file" class="form-control" id="video_url" name="video_url" value="{{ old('video_url') }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="pdf_url" class="form-label">PDF File</label>
-            <input type="file" class="form-control" id="pdf_url" name="pdf_url">
+            <label for="pdf_url" class="form-label">PDF URL</label>
+            <input type="file" class="form-control" id="pdf_url" name="pdf_url" value="{{ old('pdf_url') }}">
         </div>
 
         <div class="mb-3">
-            <label for="thumbnail_url" class="form-label">Thumbnail</label>
-            <input type="file" class="form-control" id="thumbnail_url" name="thumbnail_url">
+            <label for="thumbnail_url" class="form-label">Thumbnail URL</label>
+            <input type="file" class="form-control" id="thumbnail_url" name="thumbnail_url" value="{{ old('thumbnail_url') }}">
         </div>
 
         <div class="mb-3">
