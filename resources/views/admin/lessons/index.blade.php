@@ -4,7 +4,11 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Lessons</h2>
-        <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">Add Lesson</a>
+
+        {{-- Only show "Add Lesson" if role is admin or teacher --}}
+        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
+            <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">Add Lesson</a>
+        @endif
     </div>
 
     @if(session('success'))
@@ -19,7 +23,11 @@
                 <th>Language</th>
                 <th>Tutor</th>
                 <th>Status</th>
-                <th>Actions</th>
+
+                {{-- Only show Actions column if role is admin or teacher --}}
+                @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
+                    <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -30,14 +38,18 @@
                     <td>{{ $lesson->language }}</td>
                     <td>{{ $lesson->tutor?->name ?? 'N/A' }}</td>
                     <td>{{ $lesson->is_active ? 'Active' : 'Inactive' }}</td>
-                    <td>
-                        <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this lesson?')">Delete</button>
-                        </form>
-                    </td>
+
+                    {{-- Only show Edit/Delete if role is admin or teacher --}}
+                    @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
+                        <td>
+                            <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this lesson?')">Delete</button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
