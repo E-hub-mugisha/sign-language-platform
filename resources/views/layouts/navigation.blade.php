@@ -77,13 +77,13 @@
                         </li>
                     @elseif(auth()->user()->role === 'teacher')
                         <!-- Instructor Menus -->
-                        <li class="nk-menu-item {{ request()->routeIs('instructor.lessons.*') ? 'active' : '' }}">
-                            <a href="{{ route('instructor.lessons.index') }}" class="nk-menu-link">
+                        <li class="nk-menu-item {{ request()->routeIs('admin.lessons.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.lessons.index') }}" class="nk-menu-link">
                                 <span class="nk-menu-text">My Lessons</span>
                             </a>
                         </li>
-                        <li class="nk-menu-item {{ request()->routeIs('instructor.tips.*') ? 'active' : '' }}">
-                            <a href="{{ route('instructor.education-tips.index') }}" class="nk-menu-link">
+                        <li class="nk-menu-item {{ request()->routeIs('admin.tips.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.education-tips.index') }}" class="nk-menu-link">
                                 <span class="nk-menu-text">My Tips</span>
                             </a>
                         </li>
