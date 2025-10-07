@@ -60,7 +60,6 @@
                                     <label for="role" class="form-label">Register as</label>
                                     <select id="role" name="role" class="form-select @error('role') is-invalid @enderror" required>
                                         <option value="student">Student</option>
-                                        <option value="parent">Parent</option>
                                         <option value="teacher">Teacher</option>
                                         <option value="admin">Admin</option>
                                     </select>

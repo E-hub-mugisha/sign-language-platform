@@ -18,25 +18,6 @@ $categories = App\Models\LessonCategory::all();
                 </div>
                 <!-- Header Top Left End -->
 
-                <!-- Header Top Medal Start -->
-                <div class="header-top-medal">
-                    <div class="top-info">
-                        <p><i class="flaticon-phone-call"></i> <a href="tel:+250782390919">+250 782 390-919</a></p>
-                        <p><i class="flaticon-email"></i> <a href="mailto:support@eduplatform.com">support@eduplatform.com</a></p>
-                    </div>
-                </div>
-                <!-- Header Top Medal End -->
-
-                <!-- Header Top Right Start -->
-                <div class="header-top-right">
-                    <ul class="social">
-                        <li><a href="#"><i class="flaticon-facebook"></i></a></li>
-                        <li><a href="#"><i class="flaticon-twitter"></i></a></li>
-                        <li><a href="#"><i class="flaticon-skype"></i></a></li>
-                        <li><a href="#"><i class="flaticon-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <!-- Header Top Right End -->
 
             </div>
             <!-- Header Top Wrapper End -->
@@ -54,7 +35,7 @@ $categories = App\Models\LessonCategory::all();
 
                 <!-- Header Logo Start -->
                 <div class="header-logo">
-                    <a href="{{ route('home') }}">{{ config('app.name')}}</a>
+                    <a href="{{ route('home') }}"><span>Sign Language Learning</span></a>
                 </div>
                 <!-- Header Logo End -->
 
@@ -74,10 +55,10 @@ $categories = App\Models\LessonCategory::all();
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route('home.educationalTips') }}">Educational Tips</a>
+                            <a href="{{ route('home.educationalTips') }}">Tips</a>
                         </li>
                         <li><a href="{{ route('home.instructors') }}">Instructors</a></li>
-                        <li><a href="{{ route('home.contact') }}">Contact</a></li>
+                        <!-- <li><a href="{{ route('home.contact') }}">Contact</a></li> -->
                     </ul>
 
                 </div>
@@ -86,8 +67,14 @@ $categories = App\Models\LessonCategory::all();
                 <!-- Header Sing In & Up Start -->
                 <div class="header-sign-in-up d-none d-lg-block">
                     <ul>
+                        @if(auth()->check())
+                        <a href="{{ route('dashboard') }}" class="nk-menu-link" title="Dashboard">
+                            <span class="nk-menu-text">Dashboard</span>
+                        </a>
+                        @else
                         <li><a class="sign-in" href="{{ route('login') }}">Sign In</a></li>
                         <li><a class="sign-up" href="{{ route('register') }}">Sign Up</a></li>
+                        @endif
                     </ul>
                 </div>
                 <!-- Header Sing In & Up End -->
