@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="container-fluid mt-4">
-    <h2 class="mb-4">Admin Dashboard</h2>
+    <h2 class="mb-4">{{ Str::title(Auth::user()->role) }} Dashboard</h2>
 
     <!-- Stats Overview -->
     <div class="row mb-4">
@@ -28,7 +28,7 @@
             <div class="card text-white bg-info shadow rounded">
                 <div class="card-body">
                     <h5>Total Tips</h5>
-                    <h3>{{ $tipsCount ?? 0 }}</h3>
+                    <h3>{{ $activeTips + $inactiveTips }}</h3>
                 </div>
             </div>
         </div>
@@ -45,25 +45,11 @@
     <!-- Charts Section -->
     <div class="row mb-4">
         <div class="col-md-6">
-            <div class="card shadow rounded">
-                <div class="card-header">
-                    <h5>User Registrations (Monthly)</h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="usersChart"></canvas>
-                </div>
-            </div>
+            <canvas id="usersChart"></canvas>
         </div>
 
         <div class="col-md-6">
-            <div class="card shadow rounded">
-                <div class="card-header">
-                    <h5>Lessons Added (Monthly)</h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="lessonsChart"></canvas>
-                </div>
-            </div>
+            <canvas id="lessonsChart"></canvas>
         </div>
     </div>
 
@@ -92,11 +78,11 @@
         data: {
             labels: {!! json_encode($months ?? []) !!},
             datasets: [{
-                label: 'Users',
+                label: 'Users Registered',
                 data: {!! json_encode($userData ?? []) !!},
                 borderColor: 'blue',
                 fill: false,
-                tension: 0.2
+                tension: 0.3
             }]
         }
     });
@@ -108,7 +94,7 @@
         data: {
             labels: {!! json_encode($months ?? []) !!},
             datasets: [{
-                label: 'Lessons',
+                label: 'Lessons Created',
                 data: {!! json_encode($lessonData ?? []) !!},
                 backgroundColor: 'green'
             }]

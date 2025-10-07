@@ -22,8 +22,12 @@ class AdminController extends Controller
 
         $categoriesCount = LessonCategory::count();
         $usersCount = User::count();
-
         $topTips = EducationTip::orderBy('views', 'desc')->take(5)->get();
+
+        // Example data for chart (you can customize)
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+        $userData = [10, 20, 15, 30, 25, 40];
+        $lessonData = [5, 10, 8, 12, 20, 15];
 
         return view('dashboard', compact(
             'totalLessons',
@@ -32,9 +36,13 @@ class AdminController extends Controller
             'totalViews',
             'categoriesCount',
             'usersCount',
-            'topTips'
+            'topTips',
+            'months',
+            'userData',
+            'lessonData'
         ));
     }
+
 
     public function partners()
     {
@@ -84,5 +92,4 @@ class AdminController extends Controller
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner deleted successfully.');
     }
-
 }
