@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.lessons.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('lessons.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -23,12 +23,12 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+            <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description') }}</textarea>
         </div>
 
         <div class="mb-3">
             <label for="language" class="form-label">Language</label>
-            <select class="form-select" id="language" name="language">
+            <select class="form-select" id="language" name="language" required>
                 <option value="English" {{ old('language')=='English' ? 'selected' : '' }}>English</option>
                 <option value="Kinyarwanda" {{ old('language')=='Kinyarwanda' ? 'selected' : '' }}>Kinyarwanda</option>
             </select>
@@ -36,7 +36,7 @@
 
         <div class="mb-3">
             <label for="category_id" class="form-label">Category</label>
-            <select class="form-select" id="category_id" name="category_id">
+            <select class="form-select" id="category_id" name="category_id" required>
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ old('category_id')==$category->id ? 'selected' : '' }}>
@@ -48,7 +48,7 @@
 
         <div class="mb-3">
             <label for="video_url" class="form-label">Video URL</label>
-            <input type="file" class="form-control" id="video_url" name="video_url" value="{{ old('video_url') }}" required>
+            <input type="file" class="form-control" id="video_url" name="video_url" value="{{ old('video_url') }}">
         </div>
 
         <div class="mb-3">

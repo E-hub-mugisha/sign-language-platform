@@ -42,7 +42,7 @@
                                     Edit
                                 </button>
 
-                                <form action="{{ route('admin.lessonCategories.destroy', $category->id) }}"
+                                <form action="{{ route('lesson-categories.destroy', $category->id) }}"
                                     method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -56,7 +56,7 @@
                         <!-- Edit User Modal -->
                         <div class="modal fade" id="editCategoryModal{{ $category->id }}" tabindex="-1">
                             <div class="modal-dialog">
-                                <form method="POST" action="{{ route('admin.lessonCategories.update', $category->id) }}">
+                                <form method="POST" action="{{ route('lesson-categories.update', $category->id) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-content">
@@ -81,7 +81,7 @@
                         <!-- Delete Category Modal -->
                         <div class="modal fade" id="deleteCategoryModal{{ $category->id }}" tabindex="-1">
                             <div class="modal-dialog">
-                                <form method="POST" action="{{ route('admin.lessonCategories.destroy', $category->id) }}">
+                                <form method="POST" action="{{ route('lesson-categories.destroy', $category->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-content">
@@ -109,7 +109,7 @@
         <!-- Add Category Modal -->
         <div class="modal fade" id="addCategoryModal" tabindex="-1">
             <div class="modal-dialog">
-                <form method="POST" action="{{ route('admin.lessonCategories.store') }}">
+                <form method="POST" action="{{ route('lesson-categories.store') }}">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">

@@ -7,7 +7,7 @@
 
         {{-- Only show "Add Lesson" if role is admin or teacher --}}
         @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
-            <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">Add Lesson</a>
+            <a href="{{ route('lessons.create') }}" class="btn btn-primary">Add Lesson</a>
         @endif
     </div>
 
@@ -33,7 +33,7 @@
         <tbody>
             @foreach($lessons as $lesson)
                 <tr>
-                    <td><a href="{{ route('admin.lessons.show', $lesson->id) }}">{{ $lesson->title }}</a></td>
+                    <td><a href="{{ route('lessons.show', $lesson->id) }}">{{ $lesson->title }}</a></td>
                     <td>{{ $lesson->category?->name }}</td>
                     <td>{{ $lesson->language }}</td>
                     <td>{{ $lesson->tutor?->name ?? 'N/A' }}</td>
@@ -42,8 +42,8 @@
                     {{-- Only show Edit/Delete if role is admin or teacher --}}
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
                         <td>
-                            <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('lessons.edit', $lesson->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('lessons.destroy', $lesson->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this lesson?')">Delete</button>

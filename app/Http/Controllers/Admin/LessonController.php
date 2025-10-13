@@ -47,7 +47,7 @@ class LessonController extends Controller
 
         Lesson::create($data);
 
-        return redirect()->route('admin.lessons.index')->with('success', 'Lesson created successfully.');
+        return redirect()->route('lessons.index')->with('success', 'Lesson created successfully.');
     }
 
     public function show($id)
@@ -87,14 +87,14 @@ class LessonController extends Controller
 
         $lesson->update($data);
         
-        return redirect()->route('admin.lessons.index')->with('success', 'Lesson updated successfully.');
+        return redirect()->route('lessons.index')->with('success', 'Lesson updated successfully.');
     }
 
     public function destroy($id)
     {
         $lesson = Lesson::findOrFail($id);
         $lesson->delete();
-        return redirect()->route('admin.lessons.index')->with('success', 'Lesson deleted successfully.');
+        return redirect()->route('lessons.index')->with('success', 'Lesson deleted successfully.');
     }
 
     public function categories()
@@ -110,7 +110,7 @@ class LessonController extends Controller
         ]);
 
         LessonCategory::create($request->all());
-        return redirect()->route('admin.lessonCategories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('lesson-categories.index')->with('success', 'Category created successfully.');
     }
 
     public function updateCategory(Request $request, $id)
@@ -121,14 +121,14 @@ class LessonController extends Controller
 
         $category = LessonCategory::findOrFail($id);
         $category->update($request->all());
-        return redirect()->route('admin.lessonCategories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('lesson-categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroyCategory($id)
     {
         $category = LessonCategory::findOrFail($id);
         $category->delete();
-        return redirect()->route('admin.lessonCategories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('lesson-categories.index')->with('success', 'Category deleted successfully.');
     }
 
     public function lessonReviews()
@@ -141,6 +141,6 @@ class LessonController extends Controller
     {
         $review = LessonReview::findOrFail($id);
         $review->delete();
-        return redirect()->route('admin.lessons.reviews')->with('success', 'Review deleted successfully.');
+        return redirect()->route('lessons.reviews')->with('success', 'Review deleted successfully.');
     }
 }

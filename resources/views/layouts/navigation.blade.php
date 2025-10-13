@@ -45,45 +45,45 @@
                             <span class="nk-menu-text">Instructor Management</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.lessons.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.lessons.index') }}" class="nk-menu-link" title="Lesson Management">
+                    <li class="nk-menu-item {{ request()->routeIs('lessons.*') ? 'active' : '' }}">
+                        <a href="{{ route('lessons.index') }}" class="nk-menu-link" title="Lesson Management">
                             <span class="nk-menu-text">Lesson Management</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.lessonCategories.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.lessonCategories.index') }}" class="nk-menu-link" title="Lesson Categories">
+                    <li class="nk-menu-item {{ request()->routeIs('lesson-categories.*') ? 'active' : '' }}">
+                        <a href="{{ route('lesson-categories.index') }}" class="nk-menu-link" title="Lesson Categories">
                             <span class="nk-menu-text">Lesson Categories</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.lessons.reviews') ? 'active' : '' }}">
-                        <a href="{{ route('admin.lessons.reviews') }}" class="nk-menu-link" title="Lesson Reviews">
+                    <li class="nk-menu-item {{ request()->routeIs('lessons.reviews') ? 'active' : '' }}">
+                        <a href="{{ route('lessons.reviews') }}" class="nk-menu-link" title="Lesson Reviews">
                             <span class="nk-menu-text">Lesson Reviews</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.testimonials.index') }}" class="nk-menu-link" title="Testimonials">
+                    <li class="nk-menu-item {{ request()->routeIs('testimonials.*') ? 'active' : '' }}">
+                        <a href="{{ route('testimonials.index') }}" class="nk-menu-link" title="Testimonials">
                             <span class="nk-menu-text">Testimonials</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.partners.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.partners.index') }}" class="nk-menu-link" title="Partners">
+                    <li class="nk-menu-item {{ request()->routeIs('partners.*') ? 'active' : '' }}">
+                        <a href="{{ route('partners.index') }}" class="nk-menu-link" title="Partners">
                             <span class="nk-menu-text">Partners</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.education-tips.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.education-tips.index') }}" class="nk-menu-link" title="Education Tips">
+                    <li class="nk-menu-item {{ request()->routeIs('education-tips.*') ? 'active' : '' }}">
+                        <a href="{{ route('education-tips.index') }}" class="nk-menu-link" title="Education Tips">
                             <span class="nk-menu-text">Education Tips</span>
                         </a>
                     </li>
                     @elseif(auth()->user()->role === 'teacher')
                     <!-- Instructor Menus -->
-                    <li class="nk-menu-item {{ request()->routeIs('admin.lessons.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.lessons.index') }}" class="nk-menu-link">
+                    <li class="nk-menu-item {{ request()->routeIs('lessons.*') ? 'active' : '' }}">
+                        <a href="{{ route('lessons.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">My Lessons</span>
                         </a>
                     </li>
-                    <li class="nk-menu-item {{ request()->routeIs('admin.tips.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.education-tips.index') }}" class="nk-menu-link">
+                    <li class="nk-menu-item {{ request()->routeIs('tips.*') ? 'active' : '' }}">
+                        <a href="{{ route('education-tips.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">My Tips</span>
                         </a>
                     </li>

@@ -42,8 +42,8 @@
                                     <td>{{ $review->rating }}</td>
                                     <td>{{ $review->comment }}</td>
                                     <td>
-                                        <a href="{{ route('admin.lessons.show', $review->lesson->id) }}" class="btn btn-warning btn-sm">view lesson</a>
-                                        <form action="{{ route('admin.lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
+                                        <a href="{{ route('lessons.show', $review->lesson->id) }}" class="btn btn-warning btn-sm">view lesson</a>
+                                        <form action="{{ route('lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

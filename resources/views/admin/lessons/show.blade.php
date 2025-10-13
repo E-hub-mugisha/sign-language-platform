@@ -7,7 +7,7 @@
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
             <span>{{ $lesson->title }}</span>
-            <a href="{{ route('admin.lessons.index') }}" class="btn btn-secondary btn-sm">Back to List</a>
+            <a href="{{ route('lessons.index') }}" class="btn btn-secondary btn-sm">Back to List</a>
         </div>
         <div class="card-body">
             <div class="mb-3">
@@ -99,7 +99,7 @@
 
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
                         <td>
-                            <form action="{{ route('admin.lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('lessons.reviews.delete', $review->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -114,8 +114,8 @@
 
     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teacher')
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-warning">Edit Lesson</a>
-            <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this lesson?');">
+            <a href="{{ route('lessons.edit', $lesson->id) }}" class="btn btn-warning">Edit Lesson</a>
+            <form action="{{ route('lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this lesson?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete Lesson</button>
