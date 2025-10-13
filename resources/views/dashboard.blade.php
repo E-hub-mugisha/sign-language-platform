@@ -35,7 +35,7 @@
         <div class="col-md-3">
             <div class="card text-white bg-warning shadow rounded">
                 <div class="card-body">
-                    <h5>Active Instructors</h5>
+                    <h5>Active Instructor</h5>
                     <h3>{{ $instructorsCount ?? 0 }}</h3>
                 </div>
             </div>

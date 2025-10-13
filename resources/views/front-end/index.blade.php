@@ -9,7 +9,7 @@
 
         <!-- Slider Content Start -->
         <div class="slider-content">
-            <h4 class="sub-title">Start your favourite course</h4>
+            <h4 class="sub-title">start your favorite courses</h4>
             <h2 class="main-title">Now learning from anywhere, and build your <span>bright career.</span></h2>
             <p>It has survived not only five centuries but also the leap into electronic typesetting.</p>
             <a class="btn btn-primary btn-hover-dark" href="{{ route('register') }}">Start A Course</a>
